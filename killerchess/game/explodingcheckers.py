@@ -3,6 +3,7 @@ from game.tiles import tile
 import constants
 import Assets
 import random
+import os
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -31,7 +32,7 @@ class ExplodingCheckers(arcade.Window):
         self.all_sprites = arcade.SpriteList()
 
     def setup(self):
-        img_list = ["./Assets/tile-green.png","./Assets/tile-blue.png","./Assets/tile-red.png","./Assets/tile-orange.png"]
+        img_list = [constants.green_tile, constants.blue_tile, constants.red_tile, constants.orange_tile ]
         color_list = [arcade.color.GREEN, arcade.color.BLUE,arcade.color.RED,arcade.color.ORANGE]
         for row in range(30,600,60):
             for col in range(90,800,60):
@@ -45,7 +46,7 @@ class ExplodingCheckers(arcade.Window):
                 self.tile_list.append(self.tile)
                 
                 
-        self.player = arcade.Sprite("./Assets/token.png")
+        self.player = arcade.Sprite("./killerchess/Assets/token.png")
         self.player.center_y = SCREEN_HEIGHT / 2
         self.player.center_x = 30
         self.player.boundary_bottom = self.player.center_y - 10
@@ -69,7 +70,7 @@ class ExplodingCheckers(arcade.Window):
         need it.
         """
         if self.player._get_center_x() >= SCREEN_WIDTH - 10:
-            self.win_screen = arcade.Sprite("./Assets/R.png")
+            self.win_screen = arcade.Sprite("./killerchess/Assets/R.png")
             self.win_screen.set_position(SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2)
             self.tile_list.append(self.win_screen)
             
@@ -83,7 +84,7 @@ class ExplodingCheckers(arcade.Window):
         
     def check_tile(self,tile):
         if tile._get_color() == arcade.color.GREEN:
-            self.lose_screen = arcade.Sprite("./Assets/youdied.png")
+            self.lose_screen = arcade.Sprite("./killerchess/Assets/youdied.png")
             self.lose_screen.set_position(SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2)
             self.tile_list.append(self.lose_screen)
         
