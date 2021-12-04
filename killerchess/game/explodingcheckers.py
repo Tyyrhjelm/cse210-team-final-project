@@ -3,7 +3,7 @@ from game.tiles import tile
 import constants
 import Assets
 import random
-import os
+import asyncio
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -73,7 +73,7 @@ class ExplodingCheckers(arcade.Window):
             self.win_screen = arcade.Sprite("./killerchess/Assets/R.png")
             self.win_screen.set_position(SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2)
             self.tile_list.append(self.win_screen)
-            
+  
         
         for i in range(0, len(self.tile_list) - 2):
             if arcade.check_for_collision(self.player, self.tile_list[i]) == True:
@@ -87,8 +87,10 @@ class ExplodingCheckers(arcade.Window):
             self.lose_screen = arcade.Sprite("./killerchess/Assets/youdied.png")
             self.lose_screen.set_position(SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2)
             self.tile_list.append(self.lose_screen)
-        
-        
+            
+            arcade.schedule(arcade.close_window, 5)
+            
+
      
         
 
@@ -124,6 +126,8 @@ def main():
     game = ExplodingCheckers(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
     game.setup()
     arcade.run()
+
+    
 
 
 main()
